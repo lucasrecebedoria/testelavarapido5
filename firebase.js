@@ -19,6 +19,7 @@ export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
+// Collections
 export const colUsuarios = collection(db, "usuarios");
 export const colRelatorios = collection(db, "relatorios");
 export const colRelatoriosMensais = collection(db, "relatorios_mensais");
