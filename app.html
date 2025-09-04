@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>MoveBuss • Lavagens</title>
+<link rel="icon" href="./assets/favicon.ico" />
+<link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="left">
+      <a href="./monthly.html" class="metal"><span class="badge badge-silver">Relatório mensal</span></a>
+      <button id="btnChangePwd" class="metal">Alterar Senha</button>
+      <button id="btnLogout" class="metal">Logout</button>
+    </div>
+    <div class="spacer"></div>
+    <div class="right"><img src="./assets/logo.png" class="logo" alt="logo"/></div>
+  </header>
+
+  <main class="container">
+    <div class="row">
+      <div class="col-8">
+        <div class="card">
+          <h3 style="margin-top:0">Nova lavagem</h3>
+          <form id="washForm" class="form">
+            <div class="row">
+              <div class="col-4">
+                <div class="label">Prefixo</div>
+                <div class="input-prefix">
+                  <span>55</span>
+                  <input id="prefixo" maxlength="3" placeholder="001" inputmode="numeric" />
+                </div>
+                <div class="small">Ex.: 001 → 55001</div>
+              </div>
+              <div class="col-4">
+                <div class="label">Tipo</div>
+                <select id="tipo">
+                  <option>Lavagem Simples</option>
+                  <option>Higienização</option>
+                  <option>Exceções</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <div class="label">Data</div>
+                <input id="data" class="input" type="date" required/>
+              </div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <button class="metal" type="submit">Salvar</button>
+              <span id="saveMsg" class="small"></span>
+            </div>
+          </form>
+        </div>
+
+        <div class="card" id="painelMenos2">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+            <h3 style="margin-top:0">Atenção • Prefixos com &lt; 2 lavagens na semana</h3>
+            <div style="display:flex;gap:8px;align-items:center">
+              <input id="filtroMenos2" class="input" type="text" placeholder="Filtrar prefixo" style="max-width:180px" />
+              <button id="toggleMenos2" class="icon-btn" title="Expandir/Minimizar">▾</button>
+            </div>
+          </div>
+          <div class="min-scroll" id="painelScroll" style="display:none">
+            <table class="table" id="tabelaMenos2">
+              <thead><tr><th>Prefixo</th><th>Lavagens</th><th>Ação (admin)</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:0">
+            <h3 style="margin:0">Relatório semanal</h3>
+            <div class="btn-group">
+              <button id="btnWeeklyPdf" class="metal">Salvar em PDF</button>
+              <button id="btnWeeklyExcel" class="metal">Baixar em Excel</button>
+            </div>
+          </div>
+          <div class="row" style="align-items:end">
+            <div class="col-6">
+              <div class="label">Filtrar por prefixo</div>
+              <input id="filtroPrefixo" class="input" placeholder="Ex.: 55012" />
+            </div>
+            <div class="col-3">
+              <div class="label">Mínimo de lavagens</div>
+              <input id="filtroMinCount" class="input" type="number" min="0" value="0" />
+            </div>
+            <div class="col-3"></div>
+          </div>
+          <table class="table" id="tabelaSemanal">
+            <thead><tr><th>Data</th><th>Hora</th><th>Prefixo</th><th>Tipo</th><th>Usuário</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="card">
+          <h3 style="margin-top:0">Total no mês</h3>
+          <div id="totaisMes" class="form">
+            <div><span class="badge badge-yellow">Lavagem Simples</span> <span id="cntSimples">0</span></div>
+            <div><span class="badge badge-lightgreen">Higienização</span> <span id="cntHig">0</span></div>
+            <div><span class="badge badge-pink">Exceções</span> <span id="cntExc">0</span></div>
+            <div class="small">Atualiza em tempo real</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>Developed by Lucas L Custodio, V1</footer>
+  <script type="module" src="./app.js"></script>
+
+  <!-- Export libs -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+</body>
+</html>
